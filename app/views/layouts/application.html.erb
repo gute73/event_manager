@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EventManager</title>
+    <title><%= title(yield(:page_title)) %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,12 @@
   </head>
 
   <body>
-    <%= yield %>
+  	<%= render 'layouts/header' %>
+  	<div class='container'>
+	  	<% flash.each do | msg_type, msg | %>
+	  		<%= content_tag(:div, msg, class: "alert alert-#{msg_type}") %>
+  		<% end %>
+    	<%= yield %>
+  	</div>
   </body>
 </html>
