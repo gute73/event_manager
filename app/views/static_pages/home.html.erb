@@ -1,2 +1,13 @@
 <%= provide(:page_title, "Home") %>
 <h1>Upcoming Events</h1>
+
+<% if logged_in? %>
+	<%= link_to "Create an event", new_event_path %>
+<% end %>
+<br>
+<% if @upcoming_event_feed.any? %>
+	<%= render 'shared/event' %>
+	<%= will_paginate @upcoming_event_feed %>
+<% else %>
+	<h3>No upcoming events!<h3>
+<% end %>

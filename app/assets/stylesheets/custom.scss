@@ -34,5 +34,20 @@ input {
 .logo {
 	font-size: 2em;
 	float: left;
-	text-decoration: none !important;
+	text-decoration: none;
+	&:hover {
+		color: #337ab7;
+		text-decoration: none;
+	}
+}
+
+.event-box {
+	background-color: #2468d6;
+	color: #fff;
+	border: 1px solid #000;
+	border-radius: 20px;
+	width: 250px;
+	padding: 40px;
+	margin: auto;
+	margin-bottom: 30px;
 }

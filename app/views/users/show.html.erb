@@ -1,2 +1,21 @@
 <%= provide(:page_title, "#{@user.name}") %>
 <h1><%= @user.name %></h1>
+
+<div class='container'>
+
+	<% @user.hosted_events.each do |event| %>
+		
+		<div class='event_box'>
+			<h2><%= event.title %></h2>
+			<span><%= event.date %> <%= event.time %></span>
+			<br>
+			<span><%= event.location %></span>
+			<br>
+			<% if current_user.event_creator?(event.host) %>
+				<%= link_to "delete", event_path, method: :delete, data: { confirm: "Delete this event?" } %>
+			<% end %>
+		</div>
+
+	<% end %>
+
+</div>

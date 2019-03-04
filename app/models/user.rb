@@ -11,6 +11,18 @@ class User < ApplicationRecord
 	has_secure_password
 	validates :password, presence: true, length: { minimum: 8 }
 
+	def event_creator?(host)
+		self == host
+	end
+
+	def hosted_feed
+		Event.where("host_id = ?", id)
+	end
+
+	def attending_feed
+		Event.where("event_guest_id = ?", id)
+	end
+
 	private
 
 		def email_to_downcase
