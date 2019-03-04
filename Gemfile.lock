@@ -44,7 +44,7 @@ GEM
       tzinfo (~> 1.1)
     ansi (1.5.0)
     arel (9.0.0)
-    autoprefixer-rails (9.4.7)
+    autoprefixer-rails (9.4.9)
       execjs
     bcrypt (3.1.12)
     bindex (0.5.0)
@@ -54,7 +54,7 @@ GEM
     bootstrap-will_paginate (1.0.0)
       will_paginate
     builder (3.2.3)
-    byebug (10.0.2)
+    byebug (11.0.0)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -228,9 +228,9 @@ DEPENDENCIES
   jquery-rails (= 4.3.1)
   listen (= 3.1.5)
   minitest-reporters (= 1.1.14)
-  pg (~> 0.18.4)
+  pg (= 0.18.4)
   puma (= 3.9.1)
-  rails (>= 5.1.6.1)
+  rails (>= 5.1.6)
   rails-controller-testing (= 1.0.2)
   sass-rails (= 5.0.6)
   spring (= 2.0.2)
@@ -243,4 +243,4 @@ DEPENDENCIES
   will_paginate (= 3.1.6)
 
 BUNDLED WITH
-   1.16.1
+   1.17.2

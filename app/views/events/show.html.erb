@@ -2,11 +2,11 @@
 <h1><%= @event.title %></h1>
 
 <div class='container'>
-	<div class='event_box'>
+	<div class='event-box'>
 		<h2><%= @event.title %></h2>
 		<span>Hosted by: <%= @event.host.name %></span>
 		<br>
-		<span><%= @event.date %> <%= @event.time %></span>
+		<span><%= @event.date.strftime("%B %e, %Y") %> <%= @event.time.strftime("%l:%M %p") %></span>
 		<br>
 		<span><%= @event.location %></span>
 		<br>
