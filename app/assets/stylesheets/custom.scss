@@ -46,19 +46,29 @@ input {
 	color: #fff;
 	border: 1px solid #000;
 	border-radius: 20px;
-	width: 250px;
-	padding: 40px;
+	width: 75%;
+	padding: 20px;
 	margin: auto;
 	margin-bottom: 30px;
+	a {
+		color: #fff;
+	}
 }
 
-.event-listing {
-	background-color: #2468d6;
-	color: #fff;
-	border: 1px solid #000;
-	border-radius: 20px;
-	width: 250px;
-	padding: 40px;
-	margin: auto;
-	margin-bottom: 30px;
+.event-description {
+	font-size: 1.5em;
+}
+
+.no-events, .no-guests {
+	text-align: center;
+	font-size: 1.4em;
+}
+
+.center {
+	text-align: center;
+}
+
+.create-event {
+	width: 100%;
+	text-align: center;
 }

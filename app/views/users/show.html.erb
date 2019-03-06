@@ -1,21 +1,63 @@
-<%= provide(:page_title, "#{@user.name}") %>
-<h1><%= @user.name %></h1>
+<%= provide(:page_title, @user.name) %>
+<h1 class='center'><%= @user.name %></h1>
 
-<div class='container'>
+<% offset = "col-md-offset-3" %>
+<% if logged_in? && current_user?(@user) %>
+	<% offset = "" %>
+<% end %>
 
-	<% @user.hosted_events.each do |event| %>
-		
-		<div class='event_box'>
-			<h2><%= event.title %></h2>
-			<span><%= event.date %> <%= event.time %></span>
+
+<div class='row'>
+	<div class="col-md-6 <%= offset %>">
+		<h2 class='center'>Events Hosting</h2>
+		<hr />
+
+		<% if logged_in? && current_user?(@user) %>					
+			<div class='create-event'>
+				<%= link_to "Create an event", new_event_path %>
+			</div>
 			<br>
-			<span><%= event.location %></span>
+		<% end %>
+
+		<% if @upcoming_hosted_event_feed.any? %>
+			<%= render @upcoming_hosted_event_feed %>
+		<% else %>
 			<br>
-			<% if current_user.event_creator?(event.host) %>
-				<%= link_to "delete", event_path, method: :delete, data: { confirm: "Delete this event?" } %>
+			<p class='no-events'><%= @user.name %> is not hosting any upcoming events.</p>
+		<% end %>
+		<br>
+
+		<h2 class='center'>Past Hosted Events</h2>
+		<hr />
+		<% if @past_hosted_event_feed.any? %>
+			<%= render @past_hosted_event_feed %>
+		<% else %>
+			<br>
+			<p class='no-events'><%= @user.name %> has no past hosted events.</p>
+		<% end %>
+		<br>
+	</div>
+
+	<% if logged_in? && current_user?(@user) %>
+		<div class='col-md-6'>
+			<h2 class='center'>Events Attending</h2>
+			<hr />
+			<% if @upcoming_attending_event_feed.any? %>
+				<%= render @upcoming_attending_event_feed %>
+			<% else %>
+				<br>
+				<p class='no-events'><%= @user.name %> is not attending any upcoming events.</p>
+			<% end %>
+			<br>
+
+			<h2 class='center'>Past Attended Events</h2>
+			<hr />
+			<% if @past_attending_event_feed.any? %>
+				<%= render @past_attending_event_feed %>
+			<% else %>
+				<br>
+				<p class='no-events'><%= @user.name %> has never attended an event. </p>
 			<% end %>
 		</div>
-
 	<% end %>
-
 </div>

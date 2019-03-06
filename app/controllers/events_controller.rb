@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-	before_action :check_user_login, only: [:new, :create, :destroy]
+	before_action :check_user_login
 	before_action :check_correct_user, only: :destroy
 
   def show
@@ -43,7 +43,7 @@ class EventsController < ApplicationController
   	def check_correct_user
   		@event = Event.find_by(id: params[:id])
   		if !current_user.event_creator?(@event.host)
-  			flash[:danger] = "You can only delete an event that you created."
+  			flash[:danger] = "You may only delete an event that you created."
   			redirect_back(fallback_location: root_url)
   		end
   	end

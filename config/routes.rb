@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
- 	root 'static_pages#home'
+	root 'static_pages#home'
 
   get '/about', to: 'static_pages#about'
 
@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
 
   delete '/logout', to: 'sessions#destroy'
+
+  post '/rsvp', to: 'attendings#create'
+
+  delete '/unrsvp', to: 'attendings#destroy'
 
   resources :users, only: [:new, :create, :show]
 

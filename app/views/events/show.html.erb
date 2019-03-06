@@ -1,19 +1,31 @@
-<%= provide(:page_title, "#{@event.title}") %>
-<h1><%= @event.title %></h1>
+<%= provide(:page_title, @event.title) %>
 
-<div class='container'>
-	<div class='event-box'>
-		<h2><%= @event.title %></h2>
-		<span>Hosted by: <%= @event.host.name %></span>
+<div class='row'>
+	<div class='col-md-6'>
+		<h1><%= @event.title %></h1>
+		<h3>Hosted by: <%= link_to @event.host.name, user_path(@event.host.id) %></h3>
+		<h3><%= @event.date.strftime("%B %e, %Y") %> <%= @event.time.strftime("%l:%M %p") %></h3>
+		<h3><%= @event.location %></h3>
 		<br>
-		<span><%= @event.date.strftime("%B %e, %Y") %> <%= @event.time.strftime("%l:%M %p") %></span>
-		<br>
-		<span><%= @event.location %></span>
-		<br>
-		<p><%= @event.description %></p><br>
-		<% if current_user.event_creator?(@event.host) %>
+		<p class='event-description'><%= @event.description %></p>
+		<% if logged_in? && current_user.event_creator?(@event.host) %>
+			<br>
 			<%= link_to "delete", event_path(@event), method: :delete, data: { confirm: "Delete this event?" } %>
 		<% end %>
 	</div>
-</div>
 
+	<div class='col-md-6'>
+		<h1 class='center'>Attending</h1>
+		<div class='users-attending'>
+			<% if @event.guests.any? %>
+				<ul>
+					<% @event.guests.each do |guest| %>
+						<li><%= guest.name %></li>
+					<% end %>
+				</ul>
+			<% else %>
+				<p class='no-guests'>No guests are currently attending this event.</p>
+			<% end %>
+		</div>
+	</div>
+</div>

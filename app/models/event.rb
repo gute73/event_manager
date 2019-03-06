@@ -15,6 +15,18 @@ class Event < ApplicationRecord
 		Event.where("date >= ?", Date.current)
 	end
 
+	def self.past
+		Event.where("date < ?", Date.current)
+	end
+
+	def attending?(user)
+		guests.find_by(id: user.id)
+	end
+
+	def upcoming?
+		date >= Date.current
+	end
+
 	private
 
 		def ensure_date_has_not_passed

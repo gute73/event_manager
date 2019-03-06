@@ -1,7 +1,0 @@
-	<ol class='event-listing'>
-		<% @event.each do |event| %>
-			<h3><%= event.title %></h3>
-			<span><%= event.location %></span><br>
-			<span><%= event.date.strftime("%B %e, %Y") %> | <%= event.time.strftime("%l:%M %p") %><span>
-		<% end %>
-	</ol>

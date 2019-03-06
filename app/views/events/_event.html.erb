@@ -1,0 +1,19 @@
+<div class='event-box'>
+	<h2><%= link_to event.title, event_path(event) %></h2>
+	<span>Location: <%= event.location %></span><br>
+	<span><%= event.date.strftime("%B %e, %Y") %> | <%= event.time.strftime("%l:%M %p") %></span>
+	<br>
+	<br>
+
+	<% if logged_in? %>
+		<% if current_user.event_creator?(event.host) %>
+			<%= link_to "delete", event_path(event), method: :delete, data: { confirm: "Delete this event?" } %>
+		<% elsif event.upcoming? %>
+			<% if !event.attending?(current_user) %>
+				<%= link_to "RSVP", rsvp_path(:event_id => event.id), method: :create %>
+			<% else %>
+				<%= link_to "Cancel RSVP", unrsvp_path(:event_id => event.id), method: :delete %>
+			<% end %>
+		<% end %>
+	<% end %>
+</div>

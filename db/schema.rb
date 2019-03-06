@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(version: 2019_02_22_164305) do
 
   create_table "events", force: :cascade do |t|
     t.string "location"
+    t.date "date"
+    t.time "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "host_id"
-    t.date "date"
-    t.time "time"
     t.string "description"
     t.string "title"
     t.index ["date", "time"], name: "index_events_on_date_and_time"
