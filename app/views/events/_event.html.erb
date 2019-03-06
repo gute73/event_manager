@@ -12,7 +12,7 @@
 			<% if !event.attending?(current_user) %>
 				<%= link_to "RSVP", rsvp_path(:event_id => event.id), method: :create %>
 			<% else %>
-				<%= link_to "Cancel RSVP", unrsvp_path(:event_id => event.id), method: :delete %>
+				<%= link_to "Cancel RSVP", unrsvp_path(:event_id => event.id), method: :delete, data: { confirm: "Cancel RSVP?" } %>
 			<% end %>
 		<% end %>
 	<% end %>

@@ -8,19 +8,30 @@
 		<h3><%= @event.location %></h3>
 		<br>
 		<p class='event-description'><%= @event.description %></p>
-		<% if logged_in? && current_user.event_creator?(@event.host) %>
-			<br>
-			<%= link_to "delete", event_path(@event), method: :delete, data: { confirm: "Delete this event?" } %>
+
+		<% if logged_in? %>
+			<% if current_user.event_creator?(@event.host) %>
+				<br>
+				<%= link_to "delete", event_path(@event), method: :delete, data: { confirm: "Delete this event?" }, class: 'event-options' %>
+			<% elsif @event.upcoming? %>
+				<br>
+				<% if !@event.attending?(current_user) %>
+					<%= link_to "RSVP", rsvp_path(:event_id => @event.id), method: :create, class: 'event-options' %>
+				<% else %>
+					<%= link_to "Cancel RSVP", unrsvp_path(:event_id => @event.id), method: :delete, data: { confirm: "Cancel RSVP?" }, class: 'event-options' %>
+				<% end %>
+			<% end %>
 		<% end %>
+
 	</div>
 
 	<div class='col-md-6'>
-		<h1 class='center'>Attending</h1>
+		<h1>Attending (<%= @event.guests.count %>)</h1>
 		<div class='users-attending'>
 			<% if @event.guests.any? %>
 				<ul>
 					<% @event.guests.each do |guest| %>
-						<li><%= guest.name %></li>
+						<li><%= link_to guest.name, user_path(guest) %></li>
 					<% end %>
 				</ul>
 			<% else %>
