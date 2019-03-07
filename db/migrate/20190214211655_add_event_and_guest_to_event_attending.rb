@@ -3,6 +3,4 @@ class AddEventAndGuestToEventAttending < ActiveRecord::Migration[5.2]
     add_column :event_attendings, :event_guest_id, :integer
     add_column :event_attendings, :guest_event_id, :integer
   end
-  add_index :event_attendings, :event_guest_id
-  add_index :event_attendings, :guest_event_id
 end
