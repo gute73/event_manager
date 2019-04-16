@@ -23,6 +23,18 @@ class User < ApplicationRecord
 		Event.where("event_guest_id = ?", id)
 	end
 
+  def attend(event)
+    confirmed_events << event
+  end
+
+  def unattend(event)
+    confirmed_events.delete(event)
+  end
+
+  def attending?(event)
+    confirmed_events.include?(event)
+  end
+
 	private
 
 		def email_to_downcase

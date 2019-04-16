@@ -20,7 +20,7 @@ class Event < ApplicationRecord
 	end
 
 	def attending?(user)
-		guests.find_by(id: user.id)
+		guests.include?(user)
 	end
 
 	def upcoming?
